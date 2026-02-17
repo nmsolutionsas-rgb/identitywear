@@ -8,7 +8,6 @@ import { useWishlist } from '@/hooks/useWishlist';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useNavigate, Link } from 'react-router';
 import LoginPromptModal from '@/components/LoginPromptModal';
-import './ProductCarousel.css';
 
 const ProductCarousel = () => {
   const { toast } = useToast();

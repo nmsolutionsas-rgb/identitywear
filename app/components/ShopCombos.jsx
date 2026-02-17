@@ -10,7 +10,6 @@ import { useWishlist } from '@/hooks/useWishlist';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { Button } from '@/components/ui/button';
 import LoginPromptModal from '@/components/LoginPromptModal';
-import './ShopTheStyle.css';
 
 const ShopTheStyle = () => {
   const { toast } = useToast();

@@ -1,20 +1,21 @@
 import React from 'react';
-import { useToast } from '@/components/ui/use-toast';
-import './CategoryVideoHero.css';
+import { Link } from 'react-router';
+
+const categories = [
+  { name: 'Active wear', handle: 'active-wear' },
+  { name: 'Pants', handle: 'pants' },
+  { name: 'Thermal Leggings', handle: 'thermal-leggings' },
+  { name: 'Shorts', handle: 'shorts' },
+  { name: 'Tracksuit', handle: 'tracksuits' },
+  { name: 'T Shirts', handle: 't-shirts' },
+  { name: 'Leggins', handle: 'leggings' },
+  { name: 'Hoodies', handle: 'hoodies' },
+];
 
 const SplitBanner = () => {
-  const { toast } = useToast();
-
-  const handleCategoryClick = (category) => {
-    toast({
-      title: `Browsing ${category}`,
-      description: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
-  };
-
   return (
     <section className="cvh-section">
-      
+
       {/* WRAPPER: Holds the Video and the Categories together */}
       <div className="cvh-main-wrapper">
         <div className="cvh-video-container">
@@ -38,20 +39,39 @@ const SplitBanner = () => {
         <div className="cvh-content">
           <div className="cvh-rows">
             <div className="cvh-row cvh-row-top">
-              <span className="cvh-item" onClick={() => handleCategoryClick('Active wear')}>Active wear</span>
-              <span className="cvh-item" onClick={() => handleCategoryClick('Pants')}>Pants</span>
-              <span className="cvh-item" onClick={() => handleCategoryClick('Thermal Leggings')}>Thermal Leggings</span>
+              {categories.slice(0, 3).map((cat) => (
+                <Link
+                  key={cat.handle}
+                  className="cvh-item"
+                  to={`/collections/${cat.handle}`}
+                >
+                  {cat.name}
+                </Link>
+              ))}
             </div>
 
             <div className="cvh-row cvh-row-middle">
-              <span className="cvh-item" onClick={() => handleCategoryClick('Shorts')}>Shorts</span>
-              <span className="cvh-item" onClick={() => handleCategoryClick('Tracksuit')}>Tracksuit</span>
+              {categories.slice(3, 5).map((cat) => (
+                <Link
+                  key={cat.handle}
+                  className="cvh-item"
+                  to={`/collections/${cat.handle}`}
+                >
+                  {cat.name}
+                </Link>
+              ))}
             </div>
 
             <div className="cvh-row cvh-row-bottom">
-              <span className="cvh-item" onClick={() => handleCategoryClick('T Shirts')}>T Shirts</span>
-              <span className="cvh-item" onClick={() => handleCategoryClick('Leggins')}>Leggins</span>
-              <span className="cvh-item" onClick={() => handleCategoryClick('Hoodies')}>Hoodies</span>
+              {categories.slice(5).map((cat) => (
+                <Link
+                  key={cat.handle}
+                  className="cvh-item"
+                  to={`/collections/${cat.handle}`}
+                >
+                  {cat.name}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

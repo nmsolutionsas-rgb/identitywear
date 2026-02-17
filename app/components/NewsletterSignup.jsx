@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 // Make sure you have these icons or similar ones
 import { ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
-import './ProductCarousel.css';
 
 const products = [
   {

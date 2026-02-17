@@ -12,6 +12,9 @@ import {
 import favicon from '~/assets/favicon.svg';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
+import categoryVideoHeroStyles from '~/components/CategoryVideoHero.css?url';
+import productCarouselStyles from '~/components/ProductCarousel.css?url';
+import shopTheStyleStyles from '~/components/ShopTheStyle.css?url';
 
 // Import New Providers and Components
 import { Toaster } from '@/components/ui/toaster';
@@ -41,9 +44,12 @@ export function links() {
     },
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap',
+      href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap',
     },
     { rel: 'icon', type: 'image/svg+xml', href: favicon },
+    { rel: 'stylesheet', href: categoryVideoHeroStyles },
+    { rel: 'stylesheet', href: productCarouselStyles },
+    { rel: 'stylesheet', href: shopTheStyleStyles },
   ];
 }
 
