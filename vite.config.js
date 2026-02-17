@@ -1,11 +1,19 @@
-import {defineConfig} from 'vite';
-import {hydrogen} from '@shopify/hydrogen/vite';
-import {oxygen} from '@shopify/mini-oxygen/vite';
-import {reactRouter} from '@react-router/dev/vite';
+import { defineConfig } from 'vite';
+import { hydrogen } from '@shopify/hydrogen/vite';
+import { oxygen } from '@shopify/mini-oxygen/vite';
+import { reactRouter } from '@react-router/dev/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [hydrogen(), oxygen(), reactRouter(), tsconfigPaths()],
+  resolve: {
+    alias: {
+      '@': '/app',
+    },
+  },
+  define: {
+    global: 'globalThis',
+  },
   build: {
     // Allow a strict Content-Security-Policy
     // withtout inlining assets as base64:
@@ -23,7 +31,19 @@ export default defineConfig({
        * Include 'example-dep' in the array below.
        * @see https://vitejs.dev/config/dep-optimization-options
        */
-      include: ['set-cookie-parser', 'cookie', 'react-router'],
+      include: [
+        'shallowequal',
+        'invariant',
+        'object-assign',
+        'react-fast-compare',
+        'react-side-effect',
+        'prop-types',
+        'react-router-dom',
+        'set-cookie-parser',
+        'cookie',
+        'react-router',
+        'invariant',
+      ],
     },
   },
   server: {

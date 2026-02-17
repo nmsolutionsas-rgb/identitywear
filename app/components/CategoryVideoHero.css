@@ -1,0 +1,180 @@
+/* CategoryVideoHero.css */
+
+/* --- DESKTOP / BASE STYLES --- */
+.cvh-section {
+  width: 100%;
+  background-color: #000;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Wrapper for Video + Categories */
+.cvh-main-wrapper {
+  position: relative;
+  width: 100%;
+  height: 85vh; /* Standard Desktop Height */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cvh-video-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.cvh-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  filter: brightness(0.45);
+}
+
+.cvh-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cvh-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+}
+
+.cvh-rows {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.cvh-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.cvh-row-top,
+.cvh-row-bottom {
+  justify-content: space-between;
+}
+
+.cvh-row-middle {
+  justify-content: space-around;
+  padding: 0 10%;
+}
+
+.cvh-item {
+  color: #b9b9ba;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: clamp(2rem, 4vw, 4rem);
+  text-align: center;
+}
+
+.cvh-item:hover {
+  color: #D4AF37; /* Gold */
+  transform: scale(1.05);
+}
+
+/* Shipping Bar */
+.cvh-bottom-bar {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  background: #000;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cvh-bottom-inner {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  color: #b9b9ba;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-wrap: wrap;
+}
+
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 768px) {
+  
+  /* 1. Cut Height: Video section takes roughly 50% of the screen */
+  .cvh-main-wrapper {
+    height: 50vh; 
+  }
+
+  .cvh-content {
+    padding: 0.5rem;
+  }
+
+  /* 2. Text Layout */
+  .cvh-rows {
+    height: 100%;
+    /* Evenly spaces the 3 rows vertically */
+    justify-content: space-evenly; 
+    gap: 0; 
+  }
+
+  .cvh-row {
+    padding: 0;
+  }
+  
+  /* 3. The Grid Structure (3-2-3) */
+  .cvh-row-top,
+  .cvh-row-bottom {
+    justify-content: space-between; /* Pushes 3 items apart */
+  }
+
+  .cvh-row-middle {
+    justify-content: space-evenly; /* Centers the 2 items */
+    padding: 0;
+  }
+
+  /* 4. Bigger Text Size for Mobile */
+  .cvh-item {
+    font-size: clamp(1rem, 5vw, 1.3rem); /* Much bigger base size */
+    line-height: 1.1;
+    max-width: 32%; /* Prevents overlap for 3 items */
+    word-wrap: break-word;
+  }
+
+  /* Make middle row slightly larger since there is more room */
+  .cvh-row-middle .cvh-item {
+    font-size: clamp(1.2rem, 6vw, 1.6rem);
+    max-width: 45%;
+  }
+
+  /* 5. Bottom Bar */
+  .cvh-bottom-bar {
+    padding: 1rem;
+    background-color: #000;
+  }
+
+  .cvh-bottom-inner {
+    font-size: 0.7rem;
+    gap: 0.8rem;
+    text-align: center;
+  }
+}

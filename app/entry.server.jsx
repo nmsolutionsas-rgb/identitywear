@@ -1,7 +1,7 @@
-import {ServerRouter} from 'react-router';
-import {isbot} from 'isbot';
-import {renderToReadableStream} from 'react-dom/server';
-import {createContentSecurityPolicy} from '@shopify/hydrogen';
+import { ServerRouter } from 'react-router';
+import { isbot } from 'isbot';
+import { renderToReadableStream } from 'react-dom/server';
+import { createContentSecurityPolicy } from '@shopify/hydrogen';
 
 /**
  * @param {Request} request
@@ -17,11 +17,61 @@ export default async function handleRequest(
   reactRouterContext,
   context,
 ) {
-  const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+  const { nonce, header, NonceProvider } = createContentSecurityPolicy({
     shop: {
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
+    defaultSrc: [
+      "'self'",
+      'https://cdn.shopify.com',
+      'https://shop.app',
+      'https://*.supabase.co',
+      'https://*.google.com',
+      'https://*.googleapis.com',
+      'https://*.gstatic.com',
+    ],
+    styleSrc: [
+      "'self'",
+      "'unsafe-inline'",
+      'https://cdn.shopify.com',
+      'https://fonts.googleapis.com',
+    ],
+    scriptSrc: [
+      "'self'",
+      "'unsafe-inline'",
+      "'unsafe-eval'",
+      'https://cdn.shopify.com',
+      'https://shop.app',
+      'https://*.google.com',
+      'https://*.gstatic.com',
+    ],
+    imgSrc: [
+      "'self'",
+      'data:',
+      'https://cdn.shopify.com',
+      'https://shop.app',
+      'https://horizons-cdn.hostinger.com',
+      'https://i.ibb.co',
+      'https://*.supabase.co',
+      'https://cdn.zyrosite.com',
+      'https://*.hostingersite.com',
+      'https://*.hostinger.com',
+    ],
+    fontSrc: [
+      "'self'",
+      'data:',
+      'https://fonts.gstatic.com',
+      'https://fonts.googleapis.com',
+    ],
+    connectSrc: [
+      "'self'",
+      'https://cdn.shopify.com',
+      'https://shop.app',
+      'https://*.supabase.co',
+      'https://api-ecommerce.hostinger.com',
+      'https://*.hostinger.com',
+    ],
   });
 
   const body = await renderToReadableStream(
