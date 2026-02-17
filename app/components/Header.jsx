@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Await, NavLink, useAsyncValue } from 'react-router';
 import { useAnalytics, useOptimisticCart } from '@shopify/hydrogen';
 import { useAside } from '~/components/Aside';
+import { Search, ShoppingBag, User, Menu } from 'lucide-react';
 
 /**
  * @param {HeaderProps}
@@ -9,17 +10,19 @@ import { useAside } from '~/components/Aside';
 export function Header({ header, isLoggedIn, cart, publicStoreDomain }) {
   const { shop, menu } = header;
   return (
-    <header className="header bg-black text-white p-4 flex items-center justify-between">
-      <NavLink prefetch="intent" to="/" end className="font-bold">
-        <strong>{shop.name}</strong>
-      </NavLink>
-      <HeaderMenu
-        menu={menu}
-        viewport="desktop"
-        primaryDomainUrl={header.shop.primaryDomain.url}
-        publicStoreDomain={publicStoreDomain}
-      />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+    <header className="header sticky top-0 z-50 w-full bg-white border-b border-black/10 transition-all duration-300">
+      <div className="flex items-center justify-between px-6 py-4 max-w-[1920px] mx-auto">
+        <NavLink prefetch="intent" to="/" end className="font-oswald text-2xl tracking-tighter text-[#15171b] hover:text-[#e4202c] transition-colors">
+          <strong>{shop.name}</strong>
+        </NavLink>
+        <HeaderMenu
+          menu={menu}
+          viewport="desktop"
+          primaryDomainUrl={header.shop.primaryDomain.url}
+          publicStoreDomain={publicStoreDomain}
+        />
+        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+      </div>
     </header>
   );
 }
@@ -38,7 +41,7 @@ export function HeaderMenu({
   viewport,
   publicStoreDomain,
 }) {
-  const className = `header-menu-${viewport} flex gap-4`;
+  const className = `header-menu-${viewport} flex gap-8 items-center`;
   const { close } = useAside();
 
   return (
@@ -48,7 +51,7 @@ export function HeaderMenu({
           end
           onClick={close}
           prefetch="intent"
-          className="text-white hover:text-gray-300"
+          className="text-[#15171b] hover:text-[#e4202c] transition-colors font-oswald uppercase tracking-widest text-lg"
           to="/"
         >
           Home
@@ -67,7 +70,7 @@ export function HeaderMenu({
         return (
           <NavLink
             className={({ isActive }) =>
-              `header-menu-item text-white hover:text-gray-300 ${isActive ? 'font-bold' : ''
+              `header-menu-item text-sm font-inter uppercase tracking-[0.15em] transition-colors duration-300 ${isActive ? 'text-[#15171b] font-bold border-b-2 border-[#e4202c]' : 'text-[#15171b]/70 hover:text-[#15171b]'
               }`
             }
             end
@@ -89,18 +92,18 @@ export function HeaderMenu({
  */
 function HeaderCtas({ isLoggedIn, cart }) {
   return (
-    <nav className="header-ctas flex gap-4 items-center" role="navigation">
+    <nav className="header-ctas flex gap-5 items-center" role="navigation">
       <HeaderMenuMobileToggle />
       <NavLink
         prefetch="intent"
         to="/account"
         className={({ isActive }) =>
-          `text-white hover:text-gray-300 ${isActive ? 'font-bold' : ''}`
+          `text-[#15171b] hover:text-[#e4202c] transition-colors ${isActive ? 'text-[#e4202c]' : ''}`
         }
       >
-        <Suspense fallback="Sign in">
-          <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
+        <Suspense fallback={<User className="w-5 h-5" />}>
+          <Await resolve={isLoggedIn} errorElement={<User className="w-5 h-5" />}>
+            {(isLoggedIn) => <User className="w-5 h-5" />}
           </Await>
         </Suspense>
       </NavLink>
@@ -114,10 +117,10 @@ function HeaderMenuMobileToggle() {
   const { open } = useAside();
   return (
     <button
-      className="header-menu-mobile-toggle reset"
+      className="header-menu-mobile-toggle reset md:hidden text-[#15171b] hover:text-[#e4202c] transition-colors"
       onClick={() => open('mobile')}
     >
-      <h3>☰</h3>
+      <Menu className="w-6 h-6" />
     </button>
   );
 }
@@ -125,8 +128,8 @@ function HeaderMenuMobileToggle() {
 function SearchToggle() {
   const { open } = useAside();
   return (
-    <button className="reset" onClick={() => open('search')}>
-      Search
+    <button className="reset text-[#15171b] hover:text-[#e4202c] transition-colors" onClick={() => open('search')}>
+      <Search className="w-5 h-5" />
     </button>
   );
 }
@@ -151,8 +154,14 @@ function CartBadge({ count }) {
           url: window.location.href || '',
         });
       }}
+      className="relative text-[#15171b] hover:text-[#e4202c] transition-colors"
     >
-      Cart {count === null ? <span>&nbsp;</span> : count}
+      <ShoppingBag className="w-5 h-5" />
+      {count !== null && count > 0 && (
+        <span className="absolute -top-1 -right-1 bg-[#e4202c] text-white text-[10px] font-bold min-w-[16px] h-[16px] flex items-center justify-center rounded-full">
+          {count}
+        </span>
+      )}
     </a>
   );
 }
