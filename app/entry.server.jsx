@@ -30,6 +30,8 @@ export default async function handleRequest(
       'https://*.google.com',
       'https://*.googleapis.com',
       'https://*.gstatic.com',
+      'https://*.hostingersite.com',
+      'https://*.hostinger.com',
     ],
     styleSrc: [
       "'self'",
@@ -55,6 +57,13 @@ export default async function handleRequest(
       'https://i.ibb.co',
       'https://*.supabase.co',
       'https://cdn.zyrosite.com',
+      'https://*.hostingersite.com',
+      'https://*.hostinger.com',
+      'https://images.unsplash.com',
+    ],
+    mediaSrc: [
+      "'self'",
+      'https://cdn.shopify.com',
       'https://*.hostingersite.com',
       'https://*.hostinger.com',
     ],
