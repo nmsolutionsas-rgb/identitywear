@@ -1,5 +1,5 @@
-import {Link} from 'react-router';
-import {Facebook, Instagram, Twitter, Youtube} from 'lucide-react';
+import { Link } from 'react-router';
+import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 
 const footerColumns = [
   {
@@ -33,13 +33,13 @@ const paymentMethods = [
 ];
 
 const socialItems = [
-  {label: 'Instagram', href: 'https://instagram.com', icon: <Instagram size={16} />},
-  {label: 'TikTok', href: 'https://www.tiktok.com', icon: <span className="text-[11px] font-bold">TT</span>},
-  {label: 'YouTube', href: 'https://www.youtube.com', icon: <Youtube size={16} />},
-  {label: 'Facebook', href: 'https://facebook.com', icon: <Facebook size={16} />},
-  {label: 'Pinterest', href: 'https://www.pinterest.com', icon: <span className="text-[11px] font-bold">P</span>},
-  {label: 'Twitter', href: 'https://x.com', icon: <Twitter size={16} />},
-  {label: 'Discord', href: 'https://discord.com', icon: <span className="text-[11px] font-bold">D</span>},
+  { label: 'Instagram', href: 'https://instagram.com', icon: <Instagram size={16} /> },
+  { label: 'TikTok', href: 'https://www.tiktok.com', icon: <span className="text-[11px] font-bold">TT</span> },
+  { label: 'YouTube', href: 'https://www.youtube.com', icon: <Youtube size={16} /> },
+  { label: 'Facebook', href: 'https://facebook.com', icon: <Facebook size={16} /> },
+  { label: 'Pinterest', href: 'https://www.pinterest.com', icon: <span className="text-[11px] font-bold">P</span> },
+  { label: 'Twitter', href: 'https://x.com', icon: <Twitter size={16} /> },
+  { label: 'Discord', href: 'https://discord.com', icon: <span className="text-[11px] font-bold">D</span> },
 ];
 
 const toPath = (label) =>
@@ -49,7 +49,7 @@ const toPath = (label) =>
     .replace(/&/g, 'and')
     .replace(/\s+/g, '-')}`;
 
-const Footer = () => {
+export function Footer({ footer, header, publicStoreDomain }) {
   return (
     <footer className="bg-[#0f1115] text-white border-t border-white/10 relative">
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(25,103,255,0.12),transparent_34%),radial-gradient(circle_at_top_right,rgba(228,32,44,0.14),transparent_40%)]" />
@@ -117,6 +117,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

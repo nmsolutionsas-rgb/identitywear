@@ -10,25 +10,25 @@ import {
   useRouteLoaderData,
 } from 'react-router';
 import favicon from '~/assets/favicon.svg';
+import { FOOTER_QUERY, HEADER_QUERY } from '~/lib/fragments';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import categoryVideoHeroStyles from '~/components/CategoryVideoHero.css?url';
 import productCarouselStyles from '~/components/ProductCarousel.css?url';
 import shopTheStyleStyles from '~/components/ShopTheStyle.css?url';
+import { PageLayout } from './components/PageLayout';
 
-// Import New Providers and Components
-import { Toaster } from '@/components/ui/toaster';
-import { CartProvider } from '@/hooks/useCart';
-import { AuthProvider } from '@/contexts/SupabaseAuthContext';
-import { WishlistProvider } from '@/hooks/useWishlist';
-import GymHeader from '@/components/GymHeader';
-import Footer from '@/components/Footer';
-import WelcomeMessage from '@/components/WelcomeMessage';
-
-
+/**
+ * This is important to avoid re-fetching root queries on sub-navigations
+ * @type {ShouldRevalidateFunction}
+ */
 export const shouldRevalidate = ({ formMethod, currentUrl, nextUrl }) => {
+  // revalidate when a mutation is performed e.g add to cart, login...
   if (formMethod && formMethod !== 'GET') return true;
+
+  // revalidate when manually revalidating via useRevalidator
   if (currentUrl.toString() === nextUrl.toString()) return true;
+
   return false;
 };
 
@@ -53,9 +53,21 @@ export function links() {
   ];
 }
 
+/**
+ * @param {Route.LoaderArgs} args
+ */
 export async function loader(args) {
+  // Start fetching non-critical data without blocking time to first byte
+  const deferredData = loadDeferredData(args);
+
+  // Await the critical data required to render initial state of the page
+  const criticalData = await loadCriticalData(args);
+
   const { storefront, env } = args.context;
+
   return {
+    ...deferredData,
+    ...criticalData,
     publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
     shop: getShopAnalytics({
       storefront,
@@ -68,15 +80,65 @@ export async function loader(args) {
       country: args.context.storefront.i18n.country,
       language: args.context.storefront.i18n.language,
     },
-    env: {
-      PUBLIC_SUPABASE_URL: env.PUBLIC_SUPABASE_URL,
-      PUBLIC_SUPABASE_ANON_KEY: env.PUBLIC_SUPABASE_ANON_KEY,
-    }
   };
 }
 
+/**
+ * Load data necessary for rendering content above the fold. This is the critical data
+ * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
+ * @param {Route.LoaderArgs}
+ */
+async function loadCriticalData({ context }) {
+  const { storefront } = context;
+
+  const [header] = await Promise.all([
+    storefront.query(HEADER_QUERY, {
+      cache: storefront.CacheLong(),
+      variables: {
+        headerMenuHandle: 'main-menu', // Adjust to your header menu handle
+      },
+    }),
+    // Add other queries here, so that they are loaded in parallel
+  ]);
+
+  return { header };
+}
+
+/**
+ * Load data for rendering content below the fold. This data is deferred and will be
+ * fetched after the initial page load. If it's unavailable, the page should still 200.
+ * Make sure to not throw any errors here, as it will cause the page to 500.
+ * @param {Route.LoaderArgs}
+ */
+function loadDeferredData({ context }) {
+  const { storefront, customerAccount, cart } = context;
+
+  // defer the footer query (below the fold)
+  const footer = storefront
+    .query(FOOTER_QUERY, {
+      cache: storefront.CacheLong(),
+      variables: {
+        footerMenuHandle: 'footer', // Adjust to your footer menu handle
+      },
+    })
+    .catch((error) => {
+      // Log query errors, but don't throw them so the page can still render
+      console.error(error);
+      return null;
+    });
+  return {
+    cart: cart.get(),
+    isLoggedIn: customerAccount.isLoggedIn(),
+    footer,
+  };
+}
+
+/**
+ * @param {{children?: React.ReactNode}}
+ */
 export function Layout({ children }) {
   const nonce = useNonce();
+
   return (
     <html lang="en">
       <head>
@@ -88,21 +150,7 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body>
-        <AuthProvider>
-          <CartProvider>
-            <WishlistProvider>
-              <div className="min-h-screen bg-white flex flex-col">
-                <GymHeader />
-                <WelcomeMessage />
-                <main className="flex-grow identity-shell">
-                  {children}
-                </main>
-                <Footer />
-                <Toaster />
-              </div>
-            </WishlistProvider>
-          </CartProvider>
-        </AuthProvider>
+        {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
       </body>
@@ -111,15 +159,22 @@ export function Layout({ children }) {
 }
 
 export default function App() {
+  /** @type {RootLoader} */
   const data = useRouteLoaderData('root');
+
+  if (!data) {
+    return <Outlet />;
+  }
 
   return (
     <Analytics.Provider
-      cart={null} // We are using custom cart
-      shop={data?.shop}
-      consent={data?.consent}
+      cart={data.cart}
+      shop={data.shop}
+      consent={data.consent}
     >
-      <Outlet />
+      <PageLayout {...data}>
+        <Outlet />
+      </PageLayout>
     </Analytics.Provider>
   );
 }
