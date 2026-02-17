@@ -41,7 +41,7 @@ export function links() {
     },
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@200;300;400;500;600;700&display=swap',
+      href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap',
     },
     { rel: 'icon', type: 'image/svg+xml', href: favicon },
   ];
@@ -88,7 +88,7 @@ export function Layout({ children }) {
               <div className="min-h-screen bg-white flex flex-col">
                 <GymHeader />
                 <WelcomeMessage />
-                <main className="container mx-auto px-0 md:px-4 py-8 max-w-none flex-grow">
+                <main className="flex-grow identity-shell">
                   {children}
                 </main>
                 <Footer />

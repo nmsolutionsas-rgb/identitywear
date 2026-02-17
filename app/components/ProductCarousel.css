@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700;900&family=Inter:wght@400;700;900&display=swap');
+/* ProductCarousel — energy-gym restyled */
 
 .pc-section {
-  padding: 6rem 5%;
-  background-color: #ffffff;
-  font-family: 'Inter', sans-serif;
+  padding: 3.5rem 5%;
+  background: #f5f5f5;
+  font-family: 'Manrope', sans-serif;
   overflow: hidden;
 }
 
@@ -14,10 +14,10 @@
   min-height: 400px;
 }
 
-/* --- HEADER FIX --- */
+/* --- HEADER --- */
 .pc-header {
-  max-width: 1600px;
-  margin: 0 auto 3rem auto;
+  max-width: 1700px;
+  margin: 0 auto 2rem auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -26,40 +26,41 @@
 .pc-nav-buttons {
   display: flex !important;
   flex-direction: row !important;
-  gap: 0.75rem;
+  gap: 0.5rem;
   min-width: 120px;
   justify-content: flex-end;
   z-index: 10;
 }
 
 .pc-overline {
-  color: #D4AF37;
-  font-family: 'Oswald', sans-serif;
+  color: #e4202c;
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  font-size: 0.7rem;
   display: block;
   margin-bottom: 0.25rem;
 }
 
 .pc-main-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 900;
-  line-height: 1;
-  color: #000;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 0.92;
+  color: #15171b;
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .pc-nav-btn {
-  width: 3.5rem;
-  height: 3.5rem;
-  border: 1px solid #000;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   background: white;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,15 +68,15 @@
 }
 
 .pc-nav-btn:hover {
-  background: #000;
+  background: #15171b;
   color: #fff;
-  border-color: #000;
+  border-color: #15171b;
 }
 
 /* --- CAROUSEL TRACK --- */
 .pc-carousel-track {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   overflow-x: auto;
   scroll-behavior: smooth;
   padding: 0.5rem 0;
@@ -87,8 +88,8 @@
 }
 
 .pc-card {
-  min-width: 310px;
-  width: 310px;
+  min-width: 285px;
+  width: 285px;
   flex-shrink: 0;
 }
 
@@ -96,46 +97,48 @@
 .pc-image-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 4/5;
   overflow: hidden;
-  background: #f8f8f8;
+  background: #eceff3;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .pc-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+  transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .pc-card:hover .pc-image {
-  transform: translateY(-15px);
+  transform: scale(1.04);
 }
 
 .pc-sale-tag {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background: #D4AF37;
-  color: #000;
-  font-weight: 900;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: #e4202c;
+  color: #fff;
+  font-weight: 800;
   text-transform: uppercase;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.7rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
   z-index: 10;
 }
 
-/* SMALLER WHITE DRAWER */
+/* QUICK-ADD DRAWER */
 .pc-drawer {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   background: #ffffff;
-  padding: 1.25rem;
+  padding: 1rem;
   transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
-  border-top: 1px solid #000;
+  transition: transform 0.35s cubic-bezier(0.2, 1, 0.3, 1);
+  border-top: 2px solid #15171b;
   z-index: 20;
 }
 
@@ -145,28 +148,28 @@
 
 .pc-drawer-label {
   display: block;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  color: #bbb;
+  margin-bottom: 0.6rem;
+  color: rgba(0, 0, 0, 0.45);
 }
 
 .pc-size-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 4px;
-  margin-bottom: 1rem;
+  gap: 3px;
+  margin-bottom: 0.75rem;
 }
 
 .pc-drawer-size-btn {
   aspect-ratio: 1/1;
-  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   background: #fff;
-  font-family: 'Oswald', sans-serif;
-  font-size: 0.75rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -176,9 +179,9 @@
 }
 
 .pc-drawer-size-btn:hover:not(.out-of-stock) {
-  background: #000;
+  background: #15171b;
   color: #fff;
-  border-color: #000;
+  border-color: #15171b;
 }
 
 .pc-drawer-size-btn.out-of-stock {
@@ -189,60 +192,62 @@
 
 .pc-drawer-details-btn {
   width: 100%;
-  background: #000;
+  background: #15171b;
   color: #fff;
   border: none;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 0.75rem;
+  padding: 0.65rem;
   font-size: 0.7rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.25s ease;
 }
 
 .pc-drawer-details-btn:hover {
-  background: #D4AF37;
-  color: #000;
+  background: #e4202c;
+  color: #fff;
 }
 
 /* --- INFO SECTION --- */
 .pc-info {
-  margin-top: 1.25rem;
+  margin-top: 0.85rem;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
 }
 
 .pc-product-name {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.15rem;
   text-transform: uppercase;
-  color: #000;
+  color: #15171b;
   margin-bottom: 0.1rem;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
 }
 
 .pc-product-category {
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
-  color: #bbb;
-  letter-spacing: 0.05em;
+  color: rgba(0, 0, 0, 0.45);
+  letter-spacing: 0.12em;
 }
 
 .pc-product-price {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
-  font-size: 1.15rem;
-  color: #000;
+  font-size: 1rem;
+  color: #15171b;
+  margin-top: 0.35rem;
 }
 
 @media (max-width: 640px) {
   .pc-card {
-    min-width: 280px;
-    width: 280px;
+    min-width: 250px;
+    width: 250px;
   }
 
   .pc-header {

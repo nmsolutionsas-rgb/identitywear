@@ -148,7 +148,7 @@ function ProductDetailPage() {
 
   if (error || !product) {
     return <div className="max-w-5xl mx-auto py-12 px-4">
-        <Link to="/" className="inline-flex items-center gap-2 text-black hover:text-[#D4AF37] transition-colors mb-6 font-oswald uppercase font-bold tracking-wide">
+        <Link to="/" className="inline-flex items-center gap-2 text-black hover:text-[#e4202c] transition-colors mb-6 font-oswald uppercase font-bold tracking-wide">
           <ArrowLeft size={16} />
           Go back
         </Link>
@@ -174,7 +174,7 @@ function ProductDetailPage() {
     <>
       
       <div className="max-w-7xl mx-auto py-6 md:py-12 px-4 sm:px-6 bg-white min-h-screen">
-        <Link to="/products" className="inline-flex items-center gap-2 text-gray-500 hover:text-[#D4AF37] transition-colors mb-4 md:mb-8 font-oswald uppercase tracking-wider text-sm font-bold touch-target">
+        <Link to="/products" className="inline-flex items-center gap-2 text-gray-500 hover:text-[#e4202c] transition-colors mb-4 md:mb-8 font-oswald uppercase tracking-wider text-sm font-bold touch-target">
           <ArrowLeft size={16} />
           Back to Store
         </Link>
@@ -191,22 +191,22 @@ function ProductDetailPage() {
 
               {hasMultipleImages && (
                 <>
-                  <button onClick={handlePrevImage} className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-[#D4AF37] text-black hover:text-white p-3 transition-colors shadow-sm touch-target rounded-full md:rounded-none" aria-label="Previous image">
+                  <button onClick={handlePrevImage} className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-[#e4202c] text-black hover:text-white p-3 transition-colors shadow-sm touch-target rounded-full md:rounded-none" aria-label="Previous image">
                     <ChevronLeft size={20} />
                   </button>
-                  <button onClick={handleNextImage} className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-[#D4AF37] text-black hover:text-white p-3 transition-colors shadow-sm touch-target rounded-full md:rounded-none" aria-label="Next image">
+                  <button onClick={handleNextImage} className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-[#e4202c] text-black hover:text-white p-3 transition-colors shadow-sm touch-target rounded-full md:rounded-none" aria-label="Next image">
                     <ChevronRight size={20} />
                   </button>
                 </>
               )}
 
-              {product.ribbon_text && <div className="absolute top-4 left-4 bg-[#D4AF37] text-black text-xs font-bold px-3 py-1.5 uppercase tracking-widest shadow-md">
+              {product.ribbon_text && <div className="absolute top-4 left-4 bg-[#e4202c] text-black text-xs font-bold px-3 py-1.5 uppercase tracking-widest shadow-md">
                   {product.ribbon_text}
                 </div>}
             </div>
 
             {hasMultipleImages && <div className="flex gap-4 mt-4 md:mt-6 overflow-x-auto pb-2 scrollbar-hide px-1">
-                {product.images.map((image, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`flex-shrink-0 w-20 h-20 md:w-24 md:h-24 overflow-hidden border transition-all duration-300 ${index === currentImageIndex ? 'border-[#D4AF37] opacity-100' : 'border-transparent opacity-60 hover:opacity-100'}`}>
+                {product.images.map((image, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`flex-shrink-0 w-20 h-20 md:w-24 md:h-24 overflow-hidden border transition-all duration-300 ${index === currentImageIndex ? 'border-[#e4202c] opacity-100' : 'border-transparent opacity-60 hover:opacity-100'}`}>
                     <img src={!image.url ? placeholderImage : image.url} alt={`${product.title} ${index + 1}`} className="w-full h-full object-cover" />
                   </button>)}
               </div>}
@@ -244,7 +244,7 @@ function ProductDetailPage() {
             {product.variants.length > 1 && <div className="mb-6 md:mb-8">
                 <h3 className="text-sm font-bold text-black uppercase tracking-widest mb-3 font-oswald">Select Size</h3>
                 <div className="flex flex-wrap gap-3">
-                  {product.variants.map(variant => <button key={variant.id} onClick={() => handleVariantSelect(variant)} className={`min-w-[44px] min-h-[44px] px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 font-oswald border ${selectedVariant?.id === variant.id ? 'bg-black text-white border-black' : 'bg-white text-black border-gray-200 hover:border-[#D4AF37] hover:text-[#D4AF37]'}`}>
+                  {product.variants.map(variant => <button key={variant.id} onClick={() => handleVariantSelect(variant)} className={`min-w-[44px] min-h-[44px] px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 font-oswald border ${selectedVariant?.id === variant.id ? 'bg-black text-white border-black' : 'bg-white text-black border-gray-200 hover:border-[#e4202c] hover:text-[#e4202c]'}`}>
                       {variant.title}
                     </button>)}
                 </div>
@@ -253,18 +253,18 @@ function ProductDetailPage() {
             <div className="mb-8">
               <h3 className="text-sm font-bold text-black uppercase tracking-widest mb-3 font-oswald">Quantity</h3>
               <div className="inline-flex items-center border border-gray-200 h-14 w-40">
-                <button onClick={() => handleQuantityChange(-1)} className="w-14 h-full flex items-center justify-center text-gray-500 hover:text-[#D4AF37] hover:bg-gray-50 transition-colors touch-target">
+                <button onClick={() => handleQuantityChange(-1)} className="w-14 h-full flex items-center justify-center text-gray-500 hover:text-[#e4202c] hover:bg-gray-50 transition-colors touch-target">
                   <Minus size={18} />
                 </button>
                 <span className="flex-1 text-center text-lg text-black font-bold font-oswald">{quantity}</span>
-                <button onClick={() => handleQuantityChange(1)} className="w-14 h-full flex items-center justify-center text-gray-500 hover:text-[#D4AF37] hover:bg-gray-50 transition-colors touch-target">
+                <button onClick={() => handleQuantityChange(1)} className="w-14 h-full flex items-center justify-center text-gray-500 hover:text-[#e4202c] hover:bg-gray-50 transition-colors touch-target">
                   <Plus size={18} />
                 </button>
               </div>
             </div>
 
             <div className="mt-4">
-              <Button onClick={handleAddToCart} className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black font-bold py-7 h-14 text-lg uppercase tracking-widest rounded-none transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-oswald shadow-sm hover:shadow-md" disabled={!canAddToCart || !product.purchasable}>
+              <Button onClick={handleAddToCart} className="w-full bg-[#e4202c] hover:bg-[#15171b] text-white font-bold py-7 h-14 text-lg uppercase tracking-widest rounded-none transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-oswald shadow-sm hover:shadow-md" disabled={!canAddToCart || !product.purchasable}>
                 <ShoppingCart className="mr-3 h-5 w-5" /> Add to Cart
               </Button>
 
@@ -272,7 +272,7 @@ function ProductDetailPage() {
                   <CheckCircle size={16} /> {availableStock} in stock - Ready to ship
                 </p>}
 
-              {isStockManaged && !canAddToCart && product.purchasable && <p className="text-sm text-[#D4AF37] mt-4 flex items-center gap-2 font-inter font-medium">
+              {isStockManaged && !canAddToCart && product.purchasable && <p className="text-sm text-[#e4202c] mt-4 flex items-center gap-2 font-inter font-medium">
                   <XCircle size={16} /> Low stock warning: Only {availableStock} left.
                 </p>}
 
@@ -283,15 +283,15 @@ function ProductDetailPage() {
             
             <div className="mt-12 pt-8 border-t border-gray-100 grid grid-cols-3 gap-4">
                <div className="text-center">
-                 <div className="text-[#D4AF37] mb-2 flex justify-center"><CheckCircle size={24} /></div>
+                 <div className="text-[#e4202c] mb-2 flex justify-center"><CheckCircle size={24} /></div>
                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-black font-oswald">Premium Quality</p>
                </div>
                <div className="text-center">
-                 <div className="text-[#D4AF37] mb-2 flex justify-center"><CheckCircle size={24} /></div>
+                 <div className="text-[#e4202c] mb-2 flex justify-center"><CheckCircle size={24} /></div>
                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-black font-oswald">Fast Shipping</p>
                </div>
                <div className="text-center">
-                 <div className="text-[#D4AF37] mb-2 flex justify-center"><CheckCircle size={24} /></div>
+                 <div className="text-[#e4202c] mb-2 flex justify-center"><CheckCircle size={24} /></div>
                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-black font-oswald">Secure Checkout</p>
                </div>
             </div>

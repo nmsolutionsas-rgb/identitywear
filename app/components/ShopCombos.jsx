@@ -139,8 +139,8 @@ const ShopTheStyle = () => {
     return (
       <section className="shop-style-section flex justify-center items-center min-h-[400px]">
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-10 w-10 text-purple-500 animate-spin" />
-          <p className="text-gray-500 font-medium">Curating styles...</p>
+          <Loader2 className="h-10 w-10 text-black animate-spin" />
+          <p className="text-black/55 text-sm uppercase tracking-wide">Curating styles...</p>
         </div>
       </section>
     );
@@ -163,11 +163,12 @@ const ShopTheStyle = () => {
 
   return (
     <>
-      <section className="shop-style-section py-12 md:py-20 px-4 md:px-8">
-        <div className="sts-container max-w-7xl mx-auto">
-          <div className="sts-header mb-8 md:mb-12">
-            <h2 className="sts-title text-3xl md:text-5xl font-bold font-oswald uppercase mb-2">SHOP THE STYLE</h2>
-            <p className="sts-subtitle text-gray-500 font-inter text-sm md:text-base">Get the complete look with our curated outfit selections.</p>
+      <section className="shop-style-section py-10 md:py-14 px-4 md:px-8">
+        <div className="sts-container">
+          <div className="sts-header">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-black/55 mb-1">Curated Outfits</p>
+            <h2 className="sts-title">Shop The Style</h2>
+            <p className="sts-subtitle">Get the complete look with our curated outfit selections.</p>
           </div>
 
           <div className="sts-grid flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12">
@@ -176,16 +177,16 @@ const ShopTheStyle = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="sts-main-image-wrapper relative w-full aspect-[3/4] lg:aspect-auto lg:h-full bg-gray-100 overflow-hidden"
+              className="sts-main-image-wrapper relative w-full aspect-[3/4] lg:aspect-auto lg:h-full overflow-hidden"
             >
               <img
                 alt="Model wearing curated Identity outfit"
                 className="sts-main-image w-full h-full object-cover"
                 src="https://coral-sardine-494926.hostingersite.com/wp-content/uploads/2026/01/a8e126b2-f3c5-4f36-abc2-ded487f5d1ee.png"
               />
-              <div className="sts-main-overlay absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent text-white">
-                <h3 className="sts-main-title text-2xl md:text-3xl font-bold font-oswald uppercase mb-2">URBAN NOMAD COLLECTION</h3>
-                <p className="sts-main-description text-sm md:text-base font-light font-inter text-gray-200">The perfect balance of comfort and style for the modern city explorer.</p>
+              <div className="sts-main-overlay">
+                <h3 className="sts-main-title">URBAN NOMAD COLLECTION</h3>
+                <p className="sts-main-description">The perfect balance of comfort and style for the modern city explorer.</p>
               </div>
             </motion.div>
 
@@ -217,7 +218,7 @@ const ShopTheStyle = () => {
                       <div>
                         <div className="sts-product-header flex justify-between items-start mb-2">
                           <Link to={`/product/${product.id}`} className="block flex-1 pr-4">
-                            <h4 className="sts-product-name text-lg font-bold font-oswald uppercase hover:text-[#D4AF37] transition-colors leading-tight">
+                            <h4 className="sts-product-name">
                               {product.title}
                             </h4>
                           </Link>
@@ -227,7 +228,7 @@ const ShopTheStyle = () => {
                           >
                             <Heart
                               size={20}
-                              className={inWishlist ? 'fill-red-500 text-red-500' : 'text-gray-400'}
+                              className={inWishlist ? 'fill-[#e4202c] text-[#e4202c]' : 'text-black/35'}
                             />
                           </button>
                         </div>
@@ -252,9 +253,9 @@ const ShopTheStyle = () => {
                       <button
                         onClick={() => handleAddToCart(product)}
                         disabled={!hasStock}
-                        className={`mt-4 w-full py-3 px-4 flex items-center justify-between text-sm font-bold uppercase tracking-widest transition-colors font-oswald ${!hasStock
-                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-black text-white hover:bg-[#D4AF37] hover:text-black'
+                        className={`mt-4 w-full py-3 px-4 flex items-center justify-between text-sm font-bold uppercase tracking-[0.14em] transition-colors font-oswald ${!hasStock
+                          ? 'bg-[#f3f4f6] text-black/35 cursor-not-allowed'
+                          : 'bg-[#15171b] text-white hover:bg-[#e4202c] hover:text-white'
                           }`}
                       >
                         <span>

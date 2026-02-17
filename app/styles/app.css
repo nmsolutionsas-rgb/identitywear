@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,46 +6,61 @@
 
 @layer base {
   :root {
-    --gold-primary: #D4AF37;
-    --gold-hover: #C5A028;
-    --black-stark: #000000;
-    --white-pure: #ffffff;
-    
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --background: 0 0% 96%;
+    --foreground: 220 13% 8%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 220 13% 8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 46 64% 53%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 0%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 0%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 46 64% 53%;
+    --popover-foreground: 220 13% 8%;
+    --primary: 220 13% 8%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 92%;
+    --secondary-foreground: 220 13% 12%;
+    --muted: 220 15% 93%;
+    --muted-foreground: 220 9% 38%;
+    --accent: 357 89% 56%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 56%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 86%;
+    --input: 220 13% 86%;
+    --ring: 220 13% 8%;
     --radius: 0rem;
+    --identity-red: #e4202c;
+    --identity-blue: #1967ff;
+    --identity-ink: #15171b;
+    --identity-soft: #f2f3f5;
   }
 
   html {
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
-    scroll-padding-top: 80px; /* Offset for fixed header */
-  }
-  
-  body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    scroll-padding-top: 96px;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Oswald', sans-serif;
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.35;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
   }
 }
 
@@ -53,9 +68,26 @@
   .touch-target {
     @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
   }
-  
+
   .safe-padding-bottom {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .font-oswald {
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .font-inter {
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .identity-shell {
+    background:
+      radial-gradient(circle at top left, rgba(25, 103, 255, 0.06), transparent 36%),
+      radial-gradient(circle at top right, rgba(228, 32, 44, 0.08), transparent 40%),
+      #f5f5f5;
   }
 }
 
@@ -65,15 +97,13 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #f5f5f5;
-  border-radius: 0;
+  background: #eceff3;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #D4AF37;
-  border-radius: 0;
+  background: #15171b;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #C5A028;
+  background: #e4202c;
 }

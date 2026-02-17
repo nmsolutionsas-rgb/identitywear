@@ -1,81 +1,122 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { Facebook, Instagram, Twitter, Linkedin, Mail, MapPin, Phone, CreditCard } from 'lucide-react';
+import {Link} from 'react-router';
+import {Facebook, Instagram, Twitter, Youtube} from 'lucide-react';
+
+const footerColumns = [
+  {
+    title: 'Help',
+    links: [
+      'Help / FAQ',
+      'Delivery Information',
+      'Returns',
+      'Orders',
+      'Accessibility Statement',
+    ],
+  },
+  {
+    title: 'Legal',
+    links: ['Terms & Conditions', 'Privacy Policy', 'Sustainability'],
+  },
+  {
+    title: 'Community',
+    links: ['Student Discount', 'Newsletter', 'Referral Program'],
+  },
+];
+
+const paymentMethods = [
+  'Visa',
+  'Mastercard',
+  'PayPal',
+  'Apple Pay',
+  'Klarna',
+  'Afterpay',
+  'Amex',
+];
+
+const socialItems = [
+  {label: 'Instagram', href: 'https://instagram.com', icon: <Instagram size={16} />},
+  {label: 'TikTok', href: 'https://www.tiktok.com', icon: <span className="text-[11px] font-bold">TT</span>},
+  {label: 'YouTube', href: 'https://www.youtube.com', icon: <Youtube size={16} />},
+  {label: 'Facebook', href: 'https://facebook.com', icon: <Facebook size={16} />},
+  {label: 'Pinterest', href: 'https://www.pinterest.com', icon: <span className="text-[11px] font-bold">P</span>},
+  {label: 'Twitter', href: 'https://x.com', icon: <Twitter size={16} />},
+  {label: 'Discord', href: 'https://discord.com', icon: <span className="text-[11px] font-bold">D</span>},
+];
+
+const toPath = (label) =>
+  `/info/${label
+    .toLowerCase()
+    .replace(/\//g, '')
+    .replace(/&/g, 'and')
+    .replace(/\s+/g, '-')}`;
+
 const Footer = () => {
-  return <footer className="bg-black text-white pt-16 pb-8 border-t border-gray-800 relative z-10">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
-          {/* Brand Section */}
-          <div className="space-y-6">
-             <Link to="/">
-               <img src="https://coral-sardine-494926.hostingersite.com/wp-content/uploads/2026/01/Adobe-Express-file.png" alt="identitywear" className="h-8 md:h-10 object-contain brightness-0 invert" />
-             </Link>
-             <p className="text-gray-400 text-sm leading-relaxed font-inter max-w-xs">
-               Crush your resolutions with gear engineered for performance. Experience the perfect fusion of street style and athletic functionality.
-             </p>
-             <div className="flex gap-4 pt-2">
-               <SocialIcon icon={<Facebook size={18} />} href="#" label="Facebook" />
-               <SocialIcon icon={<Instagram size={18} />} href="#" label="Instagram" />
-               <SocialIcon icon={<Twitter size={18} />} href="#" label="Twitter" />
-               <SocialIcon icon={<Linkedin size={18} />} href="#" label="LinkedIn" />
-             </div>
-          </div>
+  return (
+    <footer className="bg-[#0f1115] text-white border-t border-white/10 relative">
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(25,103,255,0.12),transparent_34%),radial-gradient(circle_at_top_right,rgba(228,32,44,0.14),transparent_40%)]" />
 
-          {/* Info Section */}
-          <div>
-            <h3 className="text-lg font-bold font-oswald uppercase tracking-widest mb-6 text-[#D4AF37]">Info</h3>
-            <ul className="space-y-3 font-inter text-sm text-gray-400">
-              <li><Link to="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">Privacy Policy</Link></li>
-              <li><Link to="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">Terms & Conditions</Link></li>
-              <li><Link to="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">Shipping & Returns</Link></li>
-            </ul>
-          </div>
+      <div className="relative mx-auto max-w-[1700px] px-5 md:px-8 lg:px-10 py-14 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-10 border-b border-white/10 pb-12">
+          <div className="xl:col-span-2">
+            <Link to="/" className="inline-block mb-4">
+              <span className="font-oswald text-3xl leading-none">IDENTITYWEAR</span>
+            </Link>
+            <p className="max-w-md text-sm text-white/70 leading-relaxed">
+              Functional performance gear for training, athleisure, and rest-day movement. Built for high output,
+              designed for everyday identity.
+            </p>
 
-          {/* Contact */}
-          <div>
-            <h3 className="text-lg font-bold font-oswald uppercase tracking-widest mb-6 text-[#D4AF37]">Contact Us</h3>
-            <ul className="space-y-4 font-inter text-sm text-gray-400">
-              <li className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0 text-[#D4AF37]">
-                   <Mail size={14} />
-                </div>
-                <a href="mailto:identitywearcontact@gmail.com" className="hover:text-white transition-colors">identitywearcontact@gmail.com</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-gray-900 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-600 text-xs font-inter text-center md:text-left">
-            &copy; {new Date().getFullYear()} identitywear. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6">
-            <div className="flex gap-2 opacity-50 hover:opacity-100 transition-opacity duration-300">
-               <div className="h-6 px-2 bg-white rounded flex items-center justify-center text-[10px] font-bold text-blue-800">VISA</div>
-               <div className="h-6 px-2 bg-white rounded flex items-center justify-center text-[10px] font-bold text-red-600">MC</div>
-               <div className="h-6 px-2 bg-white rounded flex items-center justify-center text-[10px] font-bold text-blue-600">AMEX</div>
-               <div className="h-6 px-2 bg-white rounded flex items-center justify-center text-[10px] font-bold text-black">VIPPS</div>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {socialItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  aria-label={item.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-9 min-w-9 px-3 border border-white/20 text-white/80 inline-flex items-center justify-center hover:bg-white hover:text-black transition-colors text-xs uppercase tracking-wide"
+                >
+                  {item.icon}
+                </a>
+              ))}
             </div>
           </div>
+
+          {footerColumns.map((column) => (
+            <div key={column.title}>
+              <h3 className="text-xs tracking-[0.16em] text-white/60 mb-4">{column.title}</h3>
+              <ul className="space-y-2.5">
+                {column.links.map((link) => (
+                  <li key={link}>
+                    <Link to={toPath(link)} className="text-sm text-white/90 hover:text-[#e4202c] transition-colors">
+                      {link}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* New bottom section for web development contact */}
-        <div className="pt-8 mt-8 border-t border-gray-900 text-center">
-          <p className="text-gray-600 text-xl font-inter">
-            Crafted by
-          </p>
-          <a href="https://nordicms.eu" target="_blank" rel="noopener noreferrer" className="inline-block">
-            <img src="https://i.ibb.co/rGdfC4xJ/Nordic-logo-svart-bakgrunn.jpg" alt="Nordic Logo" className="h-16 object-contain mx-auto" />
-          </a>
+        <div className="pt-8 flex flex-col lg:flex-row gap-6 lg:items-center lg:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.14em] text-white/55 mb-3">Payment Methods</p>
+            <div className="flex flex-wrap gap-2">
+              {paymentMethods.map((method) => (
+                <span
+                  key={method}
+                  className="h-8 px-3 border border-white/20 bg-white/5 text-xs uppercase tracking-wide inline-flex items-center"
+                >
+                  {method}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <p className="text-xs text-white/55">© {new Date().getFullYear()} identitywear. All rights reserved.</p>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
-const SocialIcon = ({
-  icon,
-  href,
-  label
-}) => <a href={href} aria-label={label} className="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:bg-[#D4AF37] hover:text-black hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-[#D4AF37]/20">
-    {icon}
-  </a>;
+
 export default Footer;

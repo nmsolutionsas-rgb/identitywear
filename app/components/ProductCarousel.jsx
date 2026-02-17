@@ -102,7 +102,7 @@ const ProductCarousel = () => {
     if (scrollRef.current) {
       const isMobile = window.innerWidth < 768;
       const scrollAmount = isMobile ? window.innerWidth * 0.85 : 352;
-      
+
       scrollRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -118,11 +118,11 @@ const ProductCarousel = () => {
 
   return (
     <>
-      <section className="pc-section px-4 sm:px-6 md:px-8 py-12 md:py-20">
-        <div className="pc-header flex-col md:flex-row gap-4 md:gap-0 items-start md:items-end mb-8">
+      <section className="pc-section px-4 sm:px-6 md:px-8 py-10 md:py-14">
+        <div className="pc-header flex-col md:flex-row gap-4 md:gap-0 items-start md:items-end mb-6">
           <div className="pc-title-stack">
-            <span className="pc-overline text-sm md:text-base">New Arrivals</span>
-            <h2 className="pc-main-title text-3xl md:text-5xl lg:text-6xl mt-2">THE COLLECTION</h2>
+            <span className="pc-overline">Latest Drop</span>
+            <h2 className="pc-main-title">New In</h2>
           </div>
           <div className="pc-nav-buttons hidden md:flex">
             <button className="pc-nav-btn touch-target" onClick={() => scroll('left')}>
@@ -134,33 +134,33 @@ const ProductCarousel = () => {
           </div>
         </div>
 
-        <div 
-          className="pc-carousel-track flex overflow-x-auto gap-2 sm:gap-4 pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0" 
+        <div
+          className="pc-carousel-track flex overflow-x-auto gap-2 sm:gap-4 pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0"
           ref={scrollRef}
         >
           {products.map(product => {
             const defaultVariant = product.variants[0];
-            const displayPrice = defaultVariant.sale_price_in_cents 
-                               ? formatToNOK(defaultVariant.sale_price_in_cents)
-                               : formatToNOK(defaultVariant.price_in_cents);
+            const displayPrice = defaultVariant.sale_price_in_cents
+              ? formatToNOK(defaultVariant.sale_price_in_cents)
+              : formatToNOK(defaultVariant.price_in_cents);
             const inWishlist = isInWishlist(product.id);
 
             return (
-              <div 
-                key={product.id} 
+              <div
+                key={product.id}
                 className="pc-card group min-w-[85vw] sm:min-w-[320px] md:min-w-[350px] snap-center"
               >
                 <div className="pc-image-container aspect-[3/4] relative overflow-hidden bg-gray-100">
                   {defaultVariant.sale_price_in_cents && (
                     <span className="pc-sale-tag">Sale</span>
                   )}
-                  
+
                   {/* Wishlist Button - Triggers Login Prompt if not auth */}
-                  <button 
+                  <button
                     onClick={(e) => handleWishlistToggle(e, product)}
                     className="absolute top-2 right-2 z-30 p-2 rounded-full bg-white/80 hover:bg-white text-black transition-colors shadow-sm"
                   >
-                    <Heart size={18} className={inWishlist ? "fill-red-500 text-red-500" : "text-black"} />
+                    <Heart size={18} className={inWishlist ? "fill-[#e4202c] text-[#e4202c]" : "text-black"} />
                   </button>
 
                   <Link to={`/product/${product.id}`} className="pc-image-link block w-full h-full">
@@ -196,28 +196,28 @@ const ProductCarousel = () => {
                   </div>
                 </div>
 
-                <div className="pc-info mt-4">
+                <div className="pc-info">
                   <div className="pc-text-box">
-                    <h3 className="pc-product-name text-lg md:text-xl font-bold font-oswald uppercase truncate">{product.title}</h3>
-                    <span className="pc-product-category text-sm text-gray-500 font-inter">{product.subtitle || 'Premium Gear'}</span>
+                    <h3 className="pc-product-name">{product.title}</h3>
+                    <span className="pc-product-category">{product.subtitle || 'Performance Collection'}</span>
                   </div>
-                  <span className="pc-product-price text-sm font-bold font-oswald mt-1 block">{displayPrice}</span>
+                  <span className="pc-product-price">{displayPrice}</span>
                 </div>
               </div>
             );
           })}
         </div>
-        
+
         <div className="flex md:hidden gap-4 justify-end mt-4">
-            <button className="p-3 border border-gray-200 rounded-none touch-target" onClick={() => scroll('left')}>
-              <ChevronLeft size={20} />
-            </button>
-            <button className="p-3 border border-gray-200 rounded-none touch-target" onClick={() => scroll('right')}>
-              <ChevronRight size={20} />
-            </button>
+          <button className="p-3 border border-gray-200 rounded-none touch-target" onClick={() => scroll('left')}>
+            <ChevronLeft size={20} />
+          </button>
+          <button className="p-3 border border-gray-200 rounded-none touch-target" onClick={() => scroll('right')}>
+            <ChevronRight size={20} />
+          </button>
         </div>
       </section>
-      
+
       <LoginPromptModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
     </>
   );
